@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: local
+  profiles:
+    active: test
+  cloud:
+    config:
+#      uri: http://localhost:8800
+      label: master
