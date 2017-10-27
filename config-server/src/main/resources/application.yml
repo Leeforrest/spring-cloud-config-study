@@ -10,5 +10,5 @@ spring:
         git:
           uri: git@github.com:Leeforrest/learn-git.git
 security:
-  basic:
-    enabled: false
+                    basic:
+                      enabled: false
