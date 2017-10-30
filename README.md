@@ -49,8 +49,21 @@
 - 这里需要讲下url的 local、test、master，local为各个服务器名字（我这里的叫local），test为运行环境（这里的运行环境是test）, master是git的master分支
   - 有个坑就是：Config-Server会把url拆分重组出一个文件名，如这里的文件名是local-test.properties，configserver将通知本地库以该文件名从远程库拉取文件
 #### config client
-看config-client配置，这里一定要注意一点，就是client的这些配置必须在bootstrap.yml文件中，否则，默认请求的是http://localhost:8888  
-客户端用一个定时任务不断输出
+看config-client配置，这里一定要注意一点，就是client的这些配置必须在bootstrap.yml文件中，否则，默认请求的是http://localhost:8888 而且 看配置可以知道这是一个web服务，spring-cloud-config支持非web服务作为client但是需要额外做一些事情
+
+    server:
+        port: 8001
+    spring:
+        application:
+            name: local
+        profiles:
+            active: test
+        cloud:
+            config:
+                uri: http://localhost:8800
+                label: master
+
+客户端写一个定时任务不断输出：
 
     @Component
     @EnableScheduling
@@ -68,3 +81,15 @@
  
      output :if config server read local file first
      output :if config server read local file first
+### 修改配置手动刷新
+
+当修改配置并推送到远程库之后，config-client并不能知道配置变更，需要人为手动刷新，每有一个config-client就要做一次刷新操作，刷新使用http的post请求如下curl -X POST http://localhost:8001/refresh 如果http请求失败了，需要修改下bootstrap.yml添加内容如下：
+
+    management:
+        security:
+            enabled: false
+
+
+
+
+

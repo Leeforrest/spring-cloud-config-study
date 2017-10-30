@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableScheduling
 @RefreshScope // 使用该注解的类，会在接到SpringCloud配置中心配置刷新的时候，自动将新的配置更新到该类对应的字段中。
 public class Test {
-    @Value("${testiflocalfirst}")
+    @Value("${test}")
     private String gitRemoteContent;
 
     @Scheduled(initialDelayString = "1000", fixedRateString = "1000")
     public void sysout() {
-        System.out.println("output :" + gitRemoteContent);
+        System.out.println("key :" + gitRemoteContent);
     }
 
     @RequestMapping("/hello")

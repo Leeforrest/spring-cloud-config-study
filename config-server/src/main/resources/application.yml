@@ -8,7 +8,11 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:Leeforrest/learn-git.git
+#          uri: git@github.com:Leeforrest/learn-git.git
+          uri: https://github.com/Leeforrest/learn-git.git
+#          使用下面这个uri spring-cloud将会从本地读取本配置信息，但并不意味着可以把配置文件放在任意文件夹，我曾尝试新建一个文件夹(非git)放入一个配置文件，
+#          启动程序发现并不能读到配置
+#          uri: file://${user.home}/Documents/workspace/spring-cloud-git/
 security:
-                    basic:
-                      enabled: false
+  basic:
+    enabled: false
