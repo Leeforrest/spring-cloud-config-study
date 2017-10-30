@@ -9,7 +9,8 @@
 - Client ————> Server ————> Local git repository ————> remote git repository		 
   - Client是基于spring-cloud-config-client jar的服务器
   - Server是一个独立的web应用，负责从git远程库拉取配置返回给客户端
-  - Local Git repository：注意config server每次都会从远程库拉取文件到本地库，然后在返回给客户端
+  - Local Git repository：注意config server每次都会从远程库拉取文件然后返回给客户端，通过测试我发现本地的配置文件不会被远程库的配置文件覆盖，就是说期间没有
+  拉取的操作，不知道准不准确
     
 ### 简单示例
 #### config server
